@@ -5,16 +5,16 @@ import (
 )
 
 type Storage interface {
-	Insert(a *Author)
-	Get(id string) (Author, error)
-	Update(id int, a *Author) (Author, error)
+	Create(a *Author)
+	Get(id int) (Author, error)
+	Update(id int, a *Author) error
 	Delete(id int) error
 }
 
 type Author struct {
-	id   int    `json:"id"`
-	name string `json:"name"`
-	city string `json:"city"`
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+	City string `json:"city"`
 }
 
 type RunTimeMemoryStorage struct {
@@ -30,10 +30,10 @@ func NewRunTimeMemoryStorage() *RunTimeMemoryStorage {
 	}
 }
 
-func (s *RunTimeMemoryStorage) Insert(a *Author) {
+func (s *RunTimeMemoryStorage) Create(a *Author) {
 	s.Lock()
-	a.id = s.counter
-	s.data[a.id] = *a
+	a.ID = s.counter
+	s.data[a.ID] = *a
 
 	s.counter++
 
@@ -44,11 +44,9 @@ func (s *RunTimeMemoryStorage) Get(id int) (Author, error) {
 	return s.data[id], nil
 }
 
-func (s *RunTimeMemoryStorage) Update(id int, a *Author) (Author, error) {
-	oldAuthor := s.data[a.id]
-	oldAuthor.name = a.name
-	oldAuthor.city = a.city
-	return oldAuthor, nil
+func (s *RunTimeMemoryStorage) Update(id int, a *Author) error {
+	s.data[id] = *a
+	return nil
 }
 
 func (s *RunTimeMemoryStorage) Delete(id int) error {
