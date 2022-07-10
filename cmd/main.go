@@ -17,5 +17,5 @@ func main() {
 	router.PUT("/author/:id", handler.UpdateAuthors)
 	router.DELETE("/author/:id", handler.DeleteAuthors)
 
-	router.Run()
+	router.Run(":8000")
 }

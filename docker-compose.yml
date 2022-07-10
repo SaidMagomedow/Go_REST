@@ -1,0 +1,21 @@
+version: '3.7'
+services:
+  database:
+    container_name: go-database
+    image: postgres:14.4
+    ports:
+    - 5432:5432
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  go-http:
+    container_name: go-web
+    build: ./
+    ports:
+      - '8000'
+    volumes:
+      - ./:/app
+    depends_on:
+      - database
+
