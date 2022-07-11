@@ -15,14 +15,15 @@ This is a simple project so that I can master go and related technologies in bac
 What things you need to install the software and how to install them.
 
 ```
-You must have docker and docker-compose installed
+Docker 20.10.14 or upper
+```
+```
+docker-compose 2.3.4 or upper
 ```
 
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
 
 ```
 docker-compose build
@@ -31,8 +32,6 @@ docker-compose build
 ```
 docker-compose up
 ```
-
-End with an example of getting some data out of the system or using it for a little demo.
 
 ## Usage <a name = "usage"></a>
 
